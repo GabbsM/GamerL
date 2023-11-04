@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "203624531005",
+    "project_id": "gameoteka-6f470",
+    "storage_bucket": "gameoteka-6f470.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:203624531005:android:1f15685deccb00b234d654",
+        "android_client_info": {
+          "package_name": "com.gaby.gameotekacompose"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcx8a5jE6YX9gA9JtpuQz3NHiUvZxg7fc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
