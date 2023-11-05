@@ -10,7 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.gaby.gameotekacompose.presentation.navigation.AppNavigation
-import com.gaby.gameotekacompose.presentation.screens.LoginScreen
 import com.gaby.gameotekacompose.presentation.ui.theme.GameOTekaComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
 

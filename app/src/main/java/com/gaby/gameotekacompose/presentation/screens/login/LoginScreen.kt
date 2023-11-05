@@ -1,4 +1,4 @@
-package com.gaby.gameotekacompose.presentation.screens
+package com.gaby.gameotekacompose.presentation.screens.login
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,12 +9,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.gaby.gameotekacompose.presentation.screens.login.components.LoginBottomBar
 import com.gaby.gameotekacompose.presentation.screens.login.components.LoginContent
-import com.gaby.gameotekacompose.presentation.screens.login.loginViewModel.LoginViewModel
 import com.gaby.gameotekacompose.presentation.ui.theme.GameOTekaComposeTheme
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -23,12 +21,12 @@ import com.gaby.gameotekacompose.presentation.ui.theme.GameOTekaComposeTheme
 fun LoginScreen(navController: NavHostController) {
 
 
-
-    Scaffold(
-        topBar = {},
+    Scaffold(topBar = {},
         content = { LoginContent(navController) },
-        bottomBar = { LoginBottomBar(navController) }
-    )
+        bottomBar = { LoginBottomBar(navController) })
+
+    //MANEJAR EL ESTADO DE LA PETICION DE LOGIN
+    LoginContent(navController = navController)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -40,8 +38,7 @@ fun LoginScreen(navController: NavHostController) {
 fun DefaultPreview() {
     GameOTekaComposeTheme {
         Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
+            modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
         ) {
             LoginScreen(rememberNavController())
         }

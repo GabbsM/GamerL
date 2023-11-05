@@ -44,7 +44,8 @@ import com.gaby.gameotekacompose.presentation.screens.signUp.SignUpViewModel
 @Composable
 fun SignUpContent(navController: NavHostController, viewModel: SignUpViewModel = hiltViewModel()) {
 
-    val signupFlow = viewModel.signupFlow.collectAsState()
+    val state = viewModel.state
+
 
     Box(
         modifier = Modifier.fillMaxWidth()
@@ -93,95 +94,74 @@ fun SignUpContent(navController: NavHostController, viewModel: SignUpViewModel =
                     color = Color.Gray
                 )
 
+                //USERNAME
                 DefaultTextField(
                     modifier = Modifier.padding(top = 25.dp),
-                    value = viewModel.username.value,
-                    onValueChange = { value -> viewModel.username.value = value },
+                    value = state.username,
+                    onValueChange = { viewModel.onUserNamelInput(it) },
                     label = "Nombre Usuario",
                     icon = Icons.Default.Person,
-                    errorMsg = viewModel.usernameErrMsg.value,
-                    validateField = { viewModel.validateUsername()}
+                    errorMsg = viewModel.usernameErrMsg,
+                    validateField = { viewModel.validateUsername() }
                 )
 
 
                 Spacer(modifier = Modifier.height(10.dp))
 
+                //MAIL
                 DefaultTextField(
                     modifier = Modifier.padding(top = 0.dp),
-                    value = viewModel.email.value,
-                    onValueChange = { value -> viewModel.email.value = value },
+                    value = state.email,
+                    onValueChange = { viewModel.onEmailInput(it) },
                     label = "Correo electrónico",
                     icon = Icons.Default.Email,
-                    errorMsg = viewModel.emailErrorMsg.value,
-                    validateField = {viewModel.validateEmail()}
+                    errorMsg = viewModel.emailErrorMsg,
+                    validateField = { viewModel.validateEmail() }
 
-                    )
+                )
 
 
                 Spacer(modifier = Modifier.height(10.dp))
 
 
+                //PASWORD
                 DefaultTextField(
                     modifier = Modifier.padding(top = 0.dp),
-                    value = viewModel.password.value,
-                    onValueChange = { viewModel.password.value = it },
+                    value = state.password,
+                    onValueChange = { viewModel.onPasswordlInput(it) },
                     label = "Contraseña",
                     icon = Icons.Default.Lock,
                     hideText = true,
-                    errorMsg = viewModel.passwordErrorMsg.value,
-                    validateField = {viewModel.validatePassword()}
+                    errorMsg = viewModel.passwordErrorMsg,
+                    validateField = { viewModel.validatePassword() }
                 )
 
                 Spacer(modifier = Modifier.height(10.dp))
 
 
+                //CONFIRM PASSWORD
                 DefaultTextField(
                     modifier = Modifier.padding(top = 0.dp),
-                    value = viewModel.confirmPassword.value,
-                    onValueChange = { viewModel.confirmPassword.value = it },
+                    value = state.confirmpassword,
+                    onValueChange = { viewModel.onConfirmPasswordlInput(it) },
                     label = "Confirmar Contraseña",
                     icon = Icons.Outlined.Lock,
                     hideText = true,
-                    errorMsg = viewModel.ConfirmPasswordErrMsg.value,
-                    validateField = {viewModel.validateConfirmPassword()}
+                    errorMsg = viewModel.ConfirmPasswordErrMsg,
+                    validateField = { viewModel.validateConfirmPassword() }
                 )
 
 
-                DefaultButton(text = "REGISTRARSE",
-                              onClick = { viewModel.onSignUp() },
-                              enable = viewModel.isEnableLoginButton)
+                DefaultButton(
+                    text = "REGISTRARSE",
+                    onClick = { viewModel.onSignUp() },
+                    enable = viewModel.isEnableLoginButton
+                )
             }
         }
     }
 
-    // EVALUACIÓN DEL ESTADO
-    signupFlow.value.let {
-        when(it){
-            Response.Loading -> {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ){
-                    CircularProgressIndicator()
-                }
-            }
-            is Response.Success -> {
-                LaunchedEffect(Unit){
-                    viewModel.createUser()
-                    //Borramos el historico de pantallas
-                    navController.popBackStack(AppScreen.Login.route, true)
-                    navController.navigate(route = AppScreen.Profile.route)
-                }
-            }
-            is Response.Failure ->{
-                Toast.makeText(LocalContext.current,it.exception?.message?:"Error desconocido",Toast.LENGTH_LONG).show()
-            }
 
-            else -> {}
-        }
-    }
 }
-
-
 
 

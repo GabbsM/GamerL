@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.gaby.gameotekacompose.presentation.screens.LoginScreen
+import com.gaby.gameotekacompose.presentation.screens.login.LoginScreen
 import com.gaby.gameotekacompose.presentation.screens.profile.ProfileScreen
 import com.gaby.gameotekacompose.presentation.screens.signUp.SignUpScreen
 

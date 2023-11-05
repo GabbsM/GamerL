@@ -1,7 +1,6 @@
-package com.gaby.gameotekacompose.presentation.screens.login.loginViewModel
+package com.gaby.gameotekacompose.presentation.screens.login
 
 import android.util.Patterns
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -9,11 +8,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gaby.gameotekacompose.domain.model.Response
 import com.gaby.gameotekacompose.domain.use_cases.auth.AuthUseCase
-import com.gaby.gameotekacompose.presentation.screens.login.LoginState
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,18 +18,21 @@ class LoginViewModel @Inject constructor(private val authUseCase: AuthUseCase) :
 
     // ESTADO DE FORMULARIO
     var state by mutableStateOf(LoginState())
-            private set
+        private set
 
     //EMAIL
 
     var isMailValid by mutableStateOf(false)
-    var emailErrorMsg by  mutableStateOf("")
+        private set
+    var emailErrorMsg by mutableStateOf("")
+        private set
 
 
     //PASSWORD
-
     var isPasswordValid by mutableStateOf(false)
-    var passwordErrorMsg by  mutableStateOf("")
+        private set
+    var passwordErrorMsg by mutableStateOf("")
+        private set
 
     //ENABLE BUTTON
     var isEnableLoginButton = false
@@ -45,7 +44,7 @@ class LoginViewModel @Inject constructor(private val authUseCase: AuthUseCase) :
 
     init {
         if (currentUser != null) { // SESION INICIADA
-             loginResponse = Response.Success(currentUser)
+            loginResponse = Response.Success(currentUser)
         }
     }
 
@@ -53,11 +52,11 @@ class LoginViewModel @Inject constructor(private val authUseCase: AuthUseCase) :
         isEnableLoginButton = isMailValid && isPasswordValid
     }
 
-    fun onEmailInput(email: String){
-        state = state.copy(email = email )
+    fun onEmailInput(email: String) {
+        state = state.copy(email = email)
     }
 
-    fun onPasswordIpunt(password:String){
+    fun onPasswordIpunt(password: String) {
         state = state.copy(password = password)
     }
 
